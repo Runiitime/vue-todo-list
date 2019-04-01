@@ -1,0 +1,77 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;	
+}
+
+body {
+	width: 100%;
+	min-height: 100%;
+	background: #E8EDFA;
+}
+
+.container {
+	width: 60%;
+	min-height: 150px;
+	margin: 5% auto;
+	background: #F7F8FC;
+	box-shadow: 3px 3px 10px #ccc;
+	box-sizing: border-box;
+	padding: 2%;
+}
+
+.container .title {
+	font-size: 1.5em;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+/* ADD BUTTON */
+.container .content .add {
+	padding: 2% 15%;
+}
+
+/* ADD CLASS */
+.done {
+	text-decoration: line-through;
+}
+
+/* ITEMS */
+.items-list {
+	padding: 2% 15%;
+}
+
+.items-list .items .item-parent .item {
+	display: flex;
+}
+
+.items-list .items .item-parent .item p:hover, .items-list .items .item-parent .item-children>li .child p:hover {
+	cursor: pointer;
+}
+
+.items-list .items .item-parent .item a.delete_link, .items-list .items .item-parent .item-children>li .child a.delete_link  {
+	margin-left: 2%;
+	color: #0078D7;
+	text-decoration: underline;
+}
+
+.items-list .items .item-parent .item a.delete_link:hover, .items-list .items .item-parent .item-children>li .child a.delete_link:hover  {
+	color: #153A99;
+	cursor: pointer;
+}
+
+.items-list .items .item-parent .item-children>li .child {
+	display: flex;
+	text-align: left;
+	padding-left: 7%;
+}
+
+.error-text {
+	background: #DC3545;
+	width: 100%;
+	padding: 2% 5%;
+	border-radius: 0.25rem;
+	font-size: .9em;
+	color: #fff;
+}
