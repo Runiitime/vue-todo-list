@@ -11,8 +11,7 @@
 				<ul class="items">
 					<li class="item-parent" v-for="(item, id) in items">
 						<div class="item">
-							<p @click="checkIsDone(id, '')" :class="{done:item.isDone}">
-								<input type="checkbox" v-model="item.isDone">
+							<p @click="checkIsDone(id, '', 'p tag')" :class="{done:item.isDone}">
 								<span>
 									{{ item.text }}
 								</span>
@@ -23,8 +22,7 @@
 						<ul class="item-children" v-for="(child, childId) in item.children">
 							<li>
 								<div class="child">
-									<p @click="checkIsDone(childId, id)" :class="{done:child.isDone}">
-										<input type="checkbox" v-model="child.isDone">
+									<p @click="checkIsDone(childId, id, 'p tag')" :class="{done:child.isDone}">
 										<span>
 											{{ child.text }}
 										</span>
@@ -69,7 +67,7 @@
 				<h3>Вы действительно хотите удалить элемент?</h3>
 			</div>
 			<b-button class="mt-3" variant="primary" block @click="confirmDelete()">Да</b-button>
-			<b-button class="mt-2" variant="danger" block @click="deleteCancel()">Нет</b-button>
+			<b-button class="mt-2" variant="danger" block @click="cancelDeleting()">Нет</b-button>
 		</b-modal>
 	</div>
 </template>
@@ -232,7 +230,10 @@ import _ from 'lodash'
 			 * @param <Number> id элемент
 			 * @param <Number> parentId родителя
 			*/
-		    checkIsDone(id, parentId) {
+		    checkIsDone(id, parentId, elem) {
+		    	// Предотвращение стандартного события при нажатии на checkbox
+		    	// event.preventDefault()
+
 		    	let checked = []
 
 		    	// Дочерний элемент
@@ -247,6 +248,7 @@ import _ from 'lodash'
 		    			this.items[parentId].children.push(done)
 		    		}
 		    	} else { /* Родительский элемент */
+		    		console.log(this.items[id])
 		    		checked = this.items[id]
 		    		let children = checked.children
 		    		checked.isDone = !checked.isDone;
@@ -260,9 +262,14 @@ import _ from 'lodash'
 		    		if(checked.isDone) {
 		    			let done = _.cloneDeep(checked)
 			    		this.items.splice(id, 1)
+			    		// this.items.push(done)
+			    		// _.remove(this.items, item => {
+			    		// 	return item.id == done.id
+			    		// })
 			    		this.items.push(done)
 		    		}
 		    	}
+		    	console.log(this.items)
 		    },
 		    /*
 			 * @name deleteItem()
@@ -273,6 +280,14 @@ import _ from 'lodash'
 		    deleteItem(id, parentId) {
 		    	this.deleted_item = {id, parentId}
 		    	this.$refs.delete_modal.show()
+		    },
+		    /*
+			 * @name cancelDeleting()
+			 * @description Отмена удаления элемента
+			*/
+		    cancelDeleting() {
+		    	this.deleted_item = {}
+		    	this.$refs.delete_modal.hide()
 		    },
 		    /*
 			 * @name confirmDelete()

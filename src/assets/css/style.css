@@ -3,6 +3,7 @@
 	padding: 0;
 	list-style: none;
 	text-decoration: none;	
+	font-family: 'Aclonica';
 }
 
 body {
@@ -42,8 +43,19 @@ body {
 	padding: 2% 15%;
 }
 
+.items-list .items .item-parent {
+	margin: 2% 0;
+	border-bottom: 1px solid #ccc;
+}
+
 .items-list .items .item-parent .item {
 	display: flex;
+	border-bottom: 1px solid #ccc;
+	padding-left: 4%;
+}
+
+.items-list .items .item-parent .item .item-check {
+	margin-right: 5px;
 }
 
 .items-list .items .item-parent .item p:hover, .items-list .items .item-parent .item-children>li .child p:hover {
